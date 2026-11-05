@@ -9,6 +9,13 @@ using namespace std;
 void citire(int a[100][100], int& n, int& m)
 {
     ifstream fin("matrice.in");
+    if (!fin.is_open())
+    {
+        cout << "matrice.in lipseste" << endl;
+        n = 0;
+        m = 0;
+        return;
+    }
     fin >> n >> m;
     for (int i = 0; i < n; i++)
     {
