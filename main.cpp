@@ -1,4 +1,4 @@
-#include "algoritmi.h"
+#include "matrice.h"
 
 int main() {
 	int a[100][100], n, m;
