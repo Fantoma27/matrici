@@ -137,7 +137,16 @@ bool coloanaDescrescatoare(int a[100][100], int n, int col)
 //   i=0       P    .    .    S        P: i == j
 //   i=1       .    P    S    .        S: i + j == n - 1
 //   i=2       .    S    P    .
-//   i=3       S    .    .    P
+//   i=3 S    .    .    P
+
+// 00 01 02 03 04     00 11 22 33 44 i=j a[i][i]
+// 10 11 12 13 14
+// 20 21 22 23 24
+// 30 31 32 33 34
+// 40 41 42 43 44
+
+//
+
 
 int sumaDiagonalaPrincipala(int a[100][100], int n)
 {
@@ -149,6 +158,11 @@ int sumaDiagonalaPrincipala(int a[100][100], int n)
 
     return s;
 }
+// 00 01 02 03 04     04 13 22 31 40   i+j=4  a[i][i-n-1]
+// 10 11 12 13 14
+// 20 21 22 23 24
+// 30 31 32 33 34
+// 40 41 42 43 44
 
 int sumaDiagonalaSecundara(int a[100][100], int n)
 {
@@ -165,6 +179,13 @@ int sumaDiagonalaSecundara(int a[100][100], int n)
 //  . P x x      i < j
 //  . . P x
 //  . . . P
+//    01 02 03 04       j>i 
+//       12 13 14
+//          23 24
+//             34
+
+//  i = 0
+//  j = i + 1
 
 int sumaDeasupraDiagonaleiPrincipale(int a[100][100], int n)
 {
@@ -180,10 +201,21 @@ int sumaDeasupraDiagonaleiPrincipale(int a[100][100], int n)
     return s;
 }
 
+
+
 //  P . . .
 //  x P . .      i > j
 //  x x P .
 //  x x x P
+
+// 00 01 02 03 04     10 21 32 43
+// 10 11 12 13 14
+// 20 21 22 23 24
+// 30 31 32 33 34
+// 40 41 42 43 44
+
+// i = 1
+// j < i
 
 int sumaSubDiagonalaPrincipala(int a[100][100], int n)
 {
@@ -204,6 +236,14 @@ int sumaSubDiagonalaPrincipala(int a[100][100], int n)
 //  x S . .
 //  S . . .
 
+// 00 01 02 03 04     03 12 21 30
+// 10 11 12 13 14
+// 20 21 22 23 24
+// 30 31 32 33 34
+// 40 41 42 43 44 
+
+// j < n - 1 - i
+
 int sumaDeasupraDiagonaleiSecundare(int a[100][100], int n)
 {
     int s = 0;
@@ -222,6 +262,14 @@ int sumaDeasupraDiagonaleiSecundare(int a[100][100], int n)
 //  . . S x      i + j > n - 1
 //  . S x x
 //  S x x x
+
+//                     
+//             14        24 33 42 34 43 44   i+j> n-1
+//          23 24     j = n-1
+//       32 33 34
+//    41 42 43 44 
+
+//
 
 int sumaSubDiagonalaSecundara(int a[100][100], int n)
 {
@@ -243,6 +291,12 @@ int sumaSubDiagonalaSecundara(int a[100][100], int n)
 //  . S . P .
 //  S . . . P
 
+// 00 01 02 03 04      
+//    11 12 13   
+//       22 
+// 
+// 
+
 int sumaNord(int a[100][100], int n)
 {
     int s = 0;
@@ -257,11 +311,19 @@ int sumaNord(int a[100][100], int n)
     return s;
 }
 
+
+
 //  P . . . S
 //  . P . S .    sub ambele diagonale: i > j si i + j > n - 1
 //  . . X . .
 //  . S x P .
 //  S x x x P
+
+//                     i > j 
+//               
+//       22          32 41 42 43
+//    31 32 33   
+// 40 41 42 43 44 
 
 int sumaSud(int a[100][100], int n)
 {
@@ -283,6 +345,12 @@ int sumaSud(int a[100][100], int n)
 //  x S . P .
 //  S . . . P
 
+// 00               
+// 10 11  
+// 20 21 22 
+// 30 31 
+// 40 
+
 int sumaVest(int a[100][100], int n)
 {
     int s = 0;
@@ -302,6 +370,12 @@ int sumaVest(int a[100][100], int n)
 //  . . X x x
 //  . S . P x
 //  S . . . P
+
+//             04    
+//          13 14  i > j si i > j - n - 1
+//       22 23 24
+//          33 34
+//             44 
 
 int sumaEst(int a[100][100], int n)
 {

@@ -1,7 +1,7 @@
 #include "diagonale.h"
 
 int main() {
-	sol1();
+	sol2();
 }
 //      i j
 //max=> 2 0
