@@ -182,28 +182,24 @@ void sol3()
 //Scrie o funcție care afișează elementul care apare de 
 //cele mai multe ori în matrice. La egalitate, cel mai mic.
 
-void  frecventaElementMatrice(int a[100][100], int n, int m, int f[])
+void frecventaElementMatrice(int a[100][100], int n, int m, int f[])
 {
-    int ct = 0;
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for(int j = 0; j < n; j++)
+        for (int j = 0; j < m; j++)
         {
-             f[a[i][j]]++;
+            f[a[i][j]]++;
         }
     }
-   
 }
 
-//functie ce returneaza pozitia maximului dintr-un vecotr
-//functie ce returneaza pozitia minimului din vector
-
-int pozMaximVector(int f[])
+int pozMaximVector(int f[], int dim)
 {
-    int maxx = -1;
-    for(int i = 0; i < 10; i++)
+    int maxx = 0;
+    int poz = 0;
+    for (int i = 0; i < dim; i++)
     {
-        if(f[i] > maxx)
+        if (f[i] > maxx)
         {
             maxx = f[i];
             poz = i;
@@ -212,53 +208,95 @@ int pozMaximVector(int f[])
     return poz;
 }
 
-int pozMinimVector(int f[])
+void elementMaximFrecventa(int a[100][100], int n, int m)
 {
-    int minn = 1000;
-    int poz = -1;
-    for(int i = 0; i < 10; i++)
-    {
-        if(f[i] > 0 && f[i] < minn)
-        {
-            minn = f[i];
-            poz = i;
-        }
-    }
-    return poz;
+    int f[1000] = {0};
+    frecventaElementMatrice(a, n, m, f);
+    cout << pozMaximVector(f, 1000) << endl;
 }
 
-// void verifgasire()
-// {
-//     int a[100][100] = {
-//         {1, 2, 3},
-//         {4, 9, 8},
-//         {5, 9, 9}
-//     };
-//     int n = 3;
-//     int m = 3;
-//     cout << gasireElement(a, n, m, 9);
-// }
+void sol4()
+{
+    int a[100][100] = {
+        {3, 7, 3},
+        {5, 7, 3}
+    };
 
-// void sol4()
-// {
-//     int a[100][100] = {
-//         {3, 7, 3},
-//         {5, 7, 3}
-//     };
-//     int n = 2;
-//     int m = 3;
-//     int maxx = -1;
-//     for(int i = 0; i < n; i++)
-//     {
-//         for(int j = 0; j < m; j++)
-//         {
-//             if(gasireElement(a, n, m, a[i][j]) > maxx)
-//             {
-//                 maxx = a[i][j];
-//             }
-//         }
-//     }
-//     cout << maxx;
-// }
+    int n = 2, m = 3;
+    elementMaximFrecventa(a, n, m);
+}
+
+//Scrie o funcție care afi șează prima linie ordonată crescător și ultima dintre coloanele ordonate
+//descrescător
+//.Dacă una dintre ele nu există, afi șează NU EXISTA.
+
+bool linieCrescatoare(int a[100][100], int lin, int m) {
+    for (int j = 0; j < m - 1; j++) {
+        if (a[lin][j] > a[lin][j + 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool coloanaDescrescatoare(int a[100][100], int n, int col) {
+    for (int i = 0; i < n - 1; i++) {
+        if (a[i][col] < a[i + 1][col]) 
+        {
+            return false;
+        }
+    } 
+    
+    return true;
+}
+
+void linieSiColoanaOrdonate(int a[100][100], int n, int m) {
+    int primaLinie = -1;
+    for (int i = 0; i < n; i++) {
+        if (linieCrescatoare(a, i, m)) 
+        {
+            primaLinie = i;
+            break;
+
+        }
+    }
+
+    int ultimaColoana = -1;
+    for (int j = m - 1; j >= 0; j--) {
+        if (coloanaDescrescatoare(a, n, j)) 
+        {
+            ultimaColoana = j;
+            break;
+        }
+    }
+
+    if (primaLinie == -1 || ultimaColoana == -1) {
+        cout << "NU EXISTA" << endl;
+    } else {
+        cout << primaLinie << " " << ultimaColoana << endl;
+    }
+}
+
+void sol_linieColoana() {
+    int a1[100][100] = {
+        {8, 3, 6},
+        {1, 2, 5},
+        {4, 2, 1}
+    };
+    linieSiColoanaOrdonate(a1, 3, 3);
+
+    int a2[100][100] = {
+        {1, 9, 4},
+        {3, 7, 6},
+        {2, 5, 8}
+    };
+    linieSiColoanaOrdonate(a2, 3, 3);
+
+    int a3[100][100] = {
+        {1, 2},
+        {3, 4}
+    };
+    linieSiColoanaOrdonate(a3, 2, 2);
+}
 
 #endif
