@@ -127,5 +127,125 @@ void sol2()
     sumaChenarGradK(b, 5, 3, 1);
 }
 
+//Scrie o funcție care afișează gradul chenarului cu suma cea mai mare, suma lui și maximul de pe el. 
+//La egalitate, chenarul cu gradul mai mic.
+
+
+
+/*int nrElementeChenar1(int n, int m, int k)
+{
+    int l = n - 2 * k;
+    int c = m - 2 * k;
+    if(l <= 0 || c <= 0)
+    {
+        return 0;
+    }
+    if(l == 1)
+    {
+        return c;
+    }
+    if(c == 1)
+    {
+        return ;
+    }
+    return 2 * l + 2 * c - 4;
+}*/
+
+/*int sumaChenar(int a[100][100], int n, int m, int k)
+{
+    int i1 = k; j1 = k; i2 = n - i - 1 - k; j2 = m - 1 - k;
+    int s = 0;
+    
+    for(int j = j1; j <= j2; j++)
+    {
+        s += a[j1][j];
+    }
+    for(int i = i1; i <= i2; i++)
+    {
+        s += a[i][j2];
+    }
+    if(i1 < i2)
+    {
+        for(int j = j2 - 1; j >= j1; j--)
+        {
+            s += a[i2][j];
+        }
+    }
+    if(j1 < j2)
+    {
+        for(int i = i2 - 1; i >= i1; i--)
+        {
+            s += a[i][j1];
+        }
+    }
+    return s;
+}*/
+
+int maximChenar(int a[100][100], int n, int m, int k)
+{
+    int i1 = k, j1 = k, i2 = n - 1 - k, j2 = m - 1 - k;
+    int maxim = a[i1][j1];
+    for(int j = j1; j <= j2; j++)
+    {
+        if(a[i1][j] > maxim)
+        {
+            maxim = a[i1][j];
+        }
+    }
+    for(int i = i1 + i; i <= i2; i++)
+    {
+        if(a[i][j2] > maxim)
+        {
+            maxim = a[i][j2];
+        }
+    }
+    if(i1 < i2)
+    {
+        for(int j = i2 - 1; j >= i1; j--)
+        {
+            if(a[i2][j] > maxim)
+            {
+                maxim = a[i2][j];
+            }
+        }
+    }
+    if(j1 > j2)
+    {
+        for(int i = i2 - 1; i > i1; i--)
+        {
+            if(a[i][j1] > maxim)
+            {
+                maxim = a[i][j1];
+            }
+        }
+    }
+    return maxim;
+}
+
+void sol3()
+{
+    int a[100][100] = {
+        {1, 1, 1, 1},
+        {1, 3, 3, 1},
+        {1, 3, 3, 1},
+        {1, 1, 1, 1}
+    };
+    int n = 4, m = 4;
+    int total = nrChenare(n, m);
+    int grad = 0;
+    int sumaMaxima = sumaChenar(a, n, m, 0);
+    for(int k = 1; k < total; k++)
+    {
+        int suma = sumaChenar(a, n, m, k);
+        if(suma > sumaMaxima)
+        {
+            sumaMaxima = suma; 
+            grad = k;
+        }
+    }
+    int elementMaxim = maximChenar(a, n, m, grad);
+    cout << grad << ' ' << sumaMaxima << ' ' << elementMaxim;
+
+}
 
 #endif

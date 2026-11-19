@@ -559,21 +559,58 @@ void interschimbareColoane(int a[100][100], int n, int c1, int c2)
 }
 
 // ?
+//   0  1  2
+// 0 50 20 40
+// 1 40 50 30
+// 2 70 20 40
+
+//m = 3; lin = 1
+// i    i < m - 1   j   j < m - 1 - i   if(a[lin][j] > a[lin][j + 1])   aux = a[lin][j]   a[lin][j] = a[lin][j + 1]   a[lin][j + 1] = aux
+// 0    0 < 2       0   0 < 3 - 1 - 0        a[1][0] > a[1][1]  nu          -
+// 1    1 < 2       1   1 < 3 - 1 - 1        a[1][1] > a[1][2]          aux = a[1][1]     a[1][1] = a[1][2]           a[1][2] = a[1][1]
+// 2    2 < 2       2   2 < 3 - 1 - 2        a[1][2] > a[1][2]
+
 
 void sortareCrescLinie(int a[100][100], int m, int lin)
 {
-    for (int i = 0; i < m - 1; i++)
-    {
-        for (int j = 0; j < m - i - 1; j++)
-        {
-            if (a[lin][j] > a[lin][j + 1])
-            {
-                int aux = a[lin][j];
-                a[lin][j] = a[lin][j + 1];
-                a[lin][j + 1] = aux;
-            }
-        }
-    }
+    // for (int i = 0; i < m - 1; i++)
+    // {
+    //     for (int j = i+1; j < m; j++)
+    //     {
+    //         if (a[lin][j] > a[lin][j + 1])
+    //         {
+    //             int aux = a[lin][j];
+    //             a[lin][j] = a[lin][j + 1];
+    //             a[lin][j + 1] = aux;
+    //         }
+    //     }
+    // }
+    bool sortat=true;
+        do{
+            sortat=true;
+
+             for(int i=0;i<m-1;i++){
+                   
+                   if(a[lin][i]>a[lin][i+1]){
+                       interschimbareColoane(a,m,i,i+1);
+                       sortat=false;
+                   }
+
+             }
+        }while(sortat==false);
+    
+}
+
+void verif()
+{
+    int a[100][100] = {
+        {50, 20, 30},
+        {40, 30, 10},
+        {90, 20, 10}
+    };
+    sortareCrescLinie(a, 3, 0);
+    afisare(a, 3, 3);
+
 }
 
 // ?
@@ -660,6 +697,27 @@ int nrElementeChenar(int n, int m, int k)
 // n = 4 ; m = 5 ; k = 0
 //  i1   j1   i2   j2    sus (j: j1->j2)     dreapta (i: i1+1->i2)   if(i2 > i1)   jos (j: j2-1->j1)   if(j2 > j1)   stanga (i: i2-1->i1+1)
 //   0    0    3    4    (0,0)..(0,4)         (1,4)..(3,4)              da           (3,3)..(3,0)          da             (2,0)..(1,0)
+
+//     0  1  2  3  4
+//
+// 0   1  2  3  4  5
+// 1   6  7  8  9  10
+// 2   11 12 13 14 15
+// 3   16 17 18 19 20
+ 
+// n = 4; m = 5; k = 1
+// i1   j1   i2   j2   j = j1   j <= j2  a[i1][j]  i = i1 + 1   i <= i2  a[i][j2]  i2 > i1  j = j2 - 1  j >= j1  a[i2][j]  j2 > j1  i = i2 - 1  i > i1  a[i][j]
+// 1    1    2    3      1      1 <= 3   a[1][1]   
+//                              2 <= 3   a[1][2]
+//                              3 <= 3   a[1][3]
+//                              4 <= 3 nu
+//                                                      2       2 <= 2   a[2][3]
+//                                                      3       3 <= 2 nu
+//                                                                                 2 > 1    j = 2       2 >= 1   a[2][2]
+//                                                                                          j = 1       1 >= 1   a[2][1]
+//                                                                                                                          3 > 1   i = 1       1 > 1  
+
+// 7 8 9 14 13 12
 
 void afisareChenar(int a[100][100], int n, int m, int k)
 {
@@ -773,7 +831,14 @@ int maximChenar(int a[100][100], int n, int m, int k)
     return mx;
 }
 
-// ?
+// 1  2  3  4
+// 5  6  7  8
+// 9  10 11 12
+// 13 14 15 16
+
+// n = 4; m = 4
+// k   k < nrChenare(4, 4)   afisareChenar(a, 4, 4, k)
+// 0   0 < 
 
 void algoritmSpirala(int a[100][100], int n, int m)
 {

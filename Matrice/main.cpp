@@ -1,7 +1,7 @@
-#include "interschimbari.h"
+#include "chenare.h"
 
 int main() {
-	sol2();
+	sol3();
 }
 //      i j
 //max=> 2 0
