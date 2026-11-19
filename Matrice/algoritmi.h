@@ -391,6 +391,23 @@ int sumaEst(int a[100][100], int n)
     return s;
 }
 
+//10 20 30
+//40 50 60
+//70 80 90
+//11 22 33 
+
+// n = 4 ; m = 3 ; lin = 1
+//  i   i < n - 1 (3)   j = 0..2    a[i][j] = a[i + 1][j]
+//  1        da          0, 1, 2    linia 1 devine linia 2 (70 80 90)
+//  2        da          0, 1, 2    linia 2 devine linia 3 (11 22 33)
+//  3        nu             -        se opreste
+//
+// n--  ,   n devine 3
+
+// 10 20 30
+// 70 80 90
+// 11 22 33
+
 void stergereLinie(int a[100][100], int& n, int m, int lin)
 {
     for (int i = lin; i < n - 1; i++)
@@ -402,6 +419,23 @@ void stergereLinie(int a[100][100], int& n, int m, int lin)
     }
     n--;
 }
+
+// 10 20 30 40
+// 50 60 70 80
+// 90 11 22 33
+
+// n = 3 ; m = 4; col = 1
+//  i   i < n (3)   j = 1 (j < 3)       j = 2 (j < 3)       j = 3 (j < 3)   linia i devine
+//  0      da       a[0][1]=a[0][2]     a[0][2]=a[0][3]          nu         10  30  40
+//  1      da       a[1][1]=a[1][2]     a[1][2]=a[1][3]          nu         50  70  80
+//  2      da       a[2][1]=a[2][2]     a[2][2]=a[2][3]          nu         90  22  33
+//  3      nu             -                   -                  -            
+//
+// m--  =>  m devine 3
+
+// 10 20 40
+// 50 70 80
+// 90 22 33
 
 void stergereColoana(int a[100][100], int n, int& m, int col)
 {
@@ -418,6 +452,24 @@ void stergereColoana(int a[100][100], int n, int& m, int col)
 //  face loc pe linia lin: liniile de la lin in jos coboara cu una,
 //  apoi completezi tu a[lin][0..m-1]
 
+// 10 20 30
+// 40 50 60
+// 70 80 90
+
+// n = 3 ; m = 3 ; lin = 1
+//  i   i >= lin (1)   j = 0..2    a[i + 1][j] = a[i][j]
+//  2        da         0, 1, 2    linia 3 primeste linia 2 (70 80 90)
+//  1        da         0, 1, 2    linia 2 primeste linia 1 (40 50 60)
+//  0        nu            -       se opreste 
+
+// n++  =>   n devine 4
+
+//10 20 30
+//40 50 60
+//40 50 60
+//70 80 90
+
+
 void inserareLinie(int a[100][100], int& n, int m, int lin)
 {
     for (int i = n - 1; i >= lin; i--)
@@ -429,6 +481,19 @@ void inserareLinie(int a[100][100], int& n, int m, int lin)
     }
     n++;
 }
+
+// 10 20 30
+// 40 50 60
+// 70 80 90
+
+// n = 3 ; m = 3 ; col = 1
+//  i   i < n (3)   j = 2 (j >= 1)      j = 1 (j >= 1)      j = 0 (j >= 1)   linia i devine
+//  0      da       a[0][3]=a[0][2]     a[0][2]=a[0][1]          nu          10  20  20  30
+//  1      da       a[1][3]=a[1][2]     a[1][2]=a[1][1]          nu          40  50  50  60
+//  2      da       a[2][3]=a[2][2]     a[2][2]=a[2][1]          nu          70  80  80  90
+//  3      nu             -                   -                  -          se opreste
+
+// m++  => m devine 4
 
 void inserareColoana(int a[100][100], int n, int& m, int col)
 {
@@ -442,6 +507,21 @@ void inserareColoana(int a[100][100], int n, int& m, int col)
     m++;
 }
 
+//10 20 30
+//40 50 60
+//70 80 90
+
+//// m = 3 ; l1 = 0 ; l2 = 2
+//  j   j < m (3)   aux = a[0][j]   a[0][j] = a[2][j]   a[2][j] = aux
+//  0      da            10               70                 10
+//  1      da            20               80                 20
+//  2      da            30               90                 30
+//  3      nu             -                -                  -
+
+// 70 80 90
+// 40 50 60
+// 10 20 30
+
 void interschimbareLinii(int a[100][100], int m, int l1, int l2)
 {
     for (int j = 0; j < m; j++)
@@ -452,6 +532,22 @@ void interschimbareLinii(int a[100][100], int m, int l1, int l2)
     }
 }
 
+// 10 20 30
+// 40 50 60
+// 70 80 90
+
+// n = 3 ; c1 = 0 ; c2 = 2
+//  i   i < n (3)   aux = a[i][0]   a[i][0] = a[i][2]   a[i][2] = aux
+//  0      da            10               30                 10
+//  1      da            40               60                 40
+//  2      da            70               90                 70
+//  3      nu             -                -                  -
+
+//30 20 10
+//60 50 40
+//90 80 70
+
+
 void interschimbareColoane(int a[100][100], int n, int c1, int c2)
 {
     for (int i = 0; i < n; i++)
@@ -461,6 +557,8 @@ void interschimbareColoane(int a[100][100], int n, int c1, int c2)
         a[i][c2] = aux;
     }
 }
+
+// ?
 
 void sortareCrescLinie(int a[100][100], int m, int lin)
 {
@@ -477,6 +575,8 @@ void sortareCrescLinie(int a[100][100], int m, int lin)
         }
     }
 }
+
+// ?
 
 void sortareLiniiDupaColoana(int a[100][100], int n, int m, int col)
 {
@@ -499,6 +599,17 @@ void sortareLiniiDupaColoana(int a[100][100], int n, int m, int col)
 //        0 0 0 0 0
 // chenarul k: liniile k .. n-1-k, coloanele k .. m-1-k
 
+//n = 5 ; m = 6
+
+//  mic  if(m < mic)   mic = m   m + 1 / 2
+//   5        nu                     3
+
+
+// n = 6 ; m = 4
+//  mic  if(m < mic)   mic = m   m + 1 / 2
+//   6        da          4          2
+
+
 int nrChenare(int n, int m)
 {
     int mic = n;
@@ -511,6 +622,15 @@ int nrChenare(int n, int m)
 }
 
 //  5 x 3, k = 1: o singura coloana -> 3 elemente, nu 2*3 + 2*1 - 4
+
+
+// n = 5 ; m = 6 ; k = 0
+//  l   c   if(l <= 0 || c <= 0)   if(l == 1)   if(c == 1)   2 * l + 2 * c - 4
+//  5   6           nu                 nu          nu               18
+
+// n = 5 ; m = 6 ; k = 1
+//  l   c   if(l <= 0 || c <= 0)   if(l == 1)   if(c == 1)   2 * l + 2 * c - 4
+//  3   4            nu               nu            nu              10
 
 int nrElementeChenar(int n, int m, int k)
 {
@@ -536,6 +656,10 @@ int nrElementeChenar(int n, int m, int k)
 //  dreapta: a[k+1][m-1-k]   -> a[n-1-k][m-1-k]
 //  jos:     a[n-1-k][m-2-k] -> a[n-1-k][k]       doar daca n-1-k > k
 //  stanga:  a[n-2-k][k]     -> a[k+1][k]         doar daca m-1-k > k
+
+// n = 4 ; m = 5 ; k = 0
+//  i1   j1   i2   j2    sus (j: j1->j2)     dreapta (i: i1+1->i2)   if(i2 > i1)   jos (j: j2-1->j1)   if(j2 > j1)   stanga (i: i2-1->i1+1)
+//   0    0    3    4    (0,0)..(0,4)         (1,4)..(3,4)              da           (3,3)..(3,0)          da             (2,0)..(1,0)
 
 void afisareChenar(int a[100][100], int n, int m, int k)
 {
@@ -564,6 +688,14 @@ void afisareChenar(int a[100][100], int n, int m, int k)
         }
     }
 }
+
+//1  2  3  4
+//5  6  7  8
+//9  10 11 12
+
+// n = 3 ; m = 4 ; k = 0
+//  i1   j1   i2   j2    s initial    sus (0,0..3)    dreapta (1..2,3)    if(i2 > i1)    jos (2,2..0)    if(j2 > j1)    stanga (1,0)    return s
+//   0    0    2    3        0         s = 10            s = 30               da          s = 60            da           s = 65          65
 
 int sumaChenar(int a[100][100], int n, int m, int k)
 {
@@ -595,6 +727,8 @@ int sumaChenar(int a[100][100], int n, int m, int k)
 
     return s;
 }
+
+// ?
 
 int maximChenar(int a[100][100], int n, int m, int k)
 {
@@ -638,6 +772,8 @@ int maximChenar(int a[100][100], int n, int m, int k)
 
     return mx;
 }
+
+// ?
 
 void algoritmSpirala(int a[100][100], int n, int m)
 {

@@ -1,4 +1,4 @@
-#include "diagonale.h"
+#include "interschimbari.h"
 
 int main() {
 	sol2();
